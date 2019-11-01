@@ -19,21 +19,31 @@ def q2_shortest_billion_name(districts_list):
                 shortest_state = district["state"]
     print(f"Q2: Shortest name is {shortest_name} (length {shortest_name_length}) in state {shortest_state}")
 
-def billion_pandas(df):
-    # Initial test to get the subset of districts we're interested in.
-    billions = df.loc[df.expenses > 1000000]
+def multiply_by_1000(val):
+    return val*1000
 
-    # This is funky syntax that is the equivalent of saying that we want to apply the len() function
-    # to every value within the column df["name"]. The resulting new column is then assigned
-    # to the key "name_length".
+def fix_units(df):
+    units_to_fix = ["revenue", "local_revenue", "state_revenue", "federal_revenue", "expenses"]
+    for unit in units_to_fix:
+        edited_column_name = f"fixed_{unit}"
+        df[edited_column_name] = df[unit].apply(multiply_by_1000)
+    return df
+
+def billion_pandas(df):
+    billions = df.loc[df.expenses > 1000000]
     billions["name_length"] = df["name"].apply(len)
 
-    # .idxmin() gives us the row number with the lowest value for the name_length column.
+    min_value = billions.name_length.min()
     min_row_number = billions.name_length.idxmin()
-    
-    # We can then pass that row number back and find the whole row that contained that minimum,
-    # and then print out the name of the district and name of the state.
+
+    print(f"Minimum value is {min_value} and row number is {min_row_number}")
+
+    # Find row 2655 of the whole original dataset
+    print(df.iloc[min_row_number])
+    # Find the row in the subset of 41 districts that was originally row 2655
     minimum_row = billions.iloc[billions.index == min_row_number]
+
+
     print(minimum_row.loc[:, ['name', 'state']])
 
 
@@ -50,6 +60,18 @@ def larger_than_hawaii_hw1(districts_list):
     print(f"Q3: {larger_than_hawaii} districts with larger budgets than Hawaii.")
 
 def larger_than_hawaii_pandas(df):
+    hawaii_district = df.loc[df['state'] == 'Hawaii']
+    hawaii_expenses = hawaii_district['expenses'].iloc[0]
+
+    chained_result = df[df['state'] == 'Hawaii']['expenses'].iloc[0]
+
+    larger_than_hawaii_districts = df.loc[df['expenses'] > hawaii_expenses]
+
+    row, col = larger_than_hawaii_districts.shape
+
+    print(f"{len(larger_than_hawaii_districts)} and {row}")
+
+    print(larger_than_hawaii_districts)
     pass
 
 def new_england_hw1(districts_list, state_populations):
