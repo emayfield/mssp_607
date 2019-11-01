@@ -19,7 +19,7 @@ def q2_shortest_billion_name(districts_list):
                 shortest_state = district["state"]
     print(f"Q2: Shortest name is {shortest_name} (length {shortest_name_length}) in state {shortest_state}")
 
-def q2_pandas(df):
+def billion_pandas(df):
     # Initial test to get the subset of districts we're interested in.
     billions = df.loc[df.expenses > 1000000]
 
@@ -50,10 +50,7 @@ def larger_than_hawaii_hw1(districts_list):
     print(f"Q3: {larger_than_hawaii} districts with larger budgets than Hawaii.")
 
 def larger_than_hawaii_pandas(df):
-    hawaii = df.loc[df.state=="Hawaii"]
-    hawaii_expenses = hawaii.iloc[0].expenses
-    larger = df.loc[df.expenses > hawaii_expenses]
-    print(f"Q3: {len(larger)} districts with larger budgets than Hawaii.")
+    pass
 
 def new_england_hw1(districts_list, state_populations):
     per_capita_highest = 0
@@ -122,6 +119,8 @@ if __name__ == "__main__":
     filename = "district_statistics.csv"
     districts_df = pd.read_csv(filename)
     districts_list = build_districts_list_csv(filename)
+
+    billion_pandas(districts_df)
 
     larger_than_hawaii_hw1(districts_list)
     larger_than_hawaii_pandas(districts_df)

@@ -104,5 +104,3 @@ if __name__ == "__main__":
 #    access_data_in_pandas_traditional(districts_df)
 #    access_data_in_pandas_idiomatic(districts_df)
     finding_subsets(districts_df)
-
-    q2_pandas(districts_df)
