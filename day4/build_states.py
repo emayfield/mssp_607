@@ -62,5 +62,8 @@ def build_states_csv(states_filename):
     print(f"We created {len(states)} dictionaries.")
     return states
 
-build_states("state_sizes.csv")
-build_states_csv("state_sizes.csv")
+# This code will only run if we run this file specifically; we can still use this file as an import
+# in other places in our code and the lines below will not run.
+if __name__ == "__main__":
+    build_states("state_sizes.csv")
+    build_states_csv("state_sizes.csv")

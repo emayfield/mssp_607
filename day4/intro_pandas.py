@@ -100,7 +100,7 @@ if __name__ == "__main__":
     states_df = build_states_pandas(states_filename)
     districts_df = pd.read_csv("district_statistics.csv")
 
-#    describe_districts_with_pandas(districts_df)
-#    access_data_in_pandas_traditional(districts_df)
-#    access_data_in_pandas_idiomatic(districts_df)
+    describe_districts_with_pandas(districts_df)
+    access_data_in_pandas_traditional(districts_df)
+    access_data_in_pandas_idiomatic(districts_df)
     finding_subsets(districts_df)

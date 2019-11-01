@@ -46,3 +46,7 @@ def build_districts_list_csv(districts_filename):
                 districts_list.append(district_facts)
     return districts_list
 
+if __name__ == "__main__":
+    districts_filename = "district_statistics.csv"
+    build_districts_list(districts_filename)
+    build_districts_list_csv(districts_filename)

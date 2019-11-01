@@ -3,7 +3,7 @@ from build_districts import build_districts_list_csv
 from build_states import build_states_csv
 from intro_pandas import build_states_pandas
 
-
+# This is a problem from homework 1.
 def q2_shortest_billion_name(districts_list):
     shortest_name_length = 9999 # Placeholder value - all school district names are shorter than this.
     shortest_name = None
