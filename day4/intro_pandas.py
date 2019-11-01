@@ -84,8 +84,8 @@ def finding_subsets(df):
     print(f"Out of {original_rows} rows, {new_rows} had local revenue over $10 million.")
 
     percent = new_rows / original_rows
-    print(f"(that's {percent}%)")
 
+    print(f"(that's {percent}%)")
     # Several students found this formatting already, but we can also format
     # numbers in strings to a certain number of significant digits using the 
     # fairly ugly :.f syntax.
@@ -103,5 +103,6 @@ if __name__ == "__main__":
 #    describe_districts_with_pandas(districts_df)
 #    access_data_in_pandas_traditional(districts_df)
 #    access_data_in_pandas_idiomatic(districts_df)
-
     finding_subsets(districts_df)
+
+    q2_pandas(districts_df)

@@ -3,6 +3,40 @@ from build_districts import build_districts_list_csv
 from build_states import build_states_csv
 from intro_pandas import build_states_pandas
 
+
+def q2_shortest_billion_name(districts_list):
+    shortest_name_length = 9999 # Placeholder value - all school district names are shorter than this.
+    shortest_name = None
+    shortest_state = None
+    for district in districts_list:
+        expenses = district["expenses"]
+        if expenses > 1000000:
+            name = district["name"]
+            length = len(name)
+            if length < shortest_name_length:
+                shortest_name_length = length
+                shortest_name = name
+                shortest_state = district["state"]
+    print(f"Q2: Shortest name is {shortest_name} (length {shortest_name_length}) in state {shortest_state}")
+
+def q2_pandas(df):
+    # Initial test to get the subset of districts we're interested in.
+    billions = df.loc[df.expenses > 1000000]
+
+    # This is funky syntax that is the equivalent of saying that we want to apply the len() function
+    # to every value within the column df["name"]. The resulting new column is then assigned
+    # to the key "name_length".
+    billions["name_length"] = df["name"].apply(len)
+
+    # .idxmin() gives us the row number with the lowest value for the name_length column.
+    min_row_number = billions.name_length.idxmin()
+    
+    # We can then pass that row number back and find the whole row that contained that minimum,
+    # and then print out the name of the district and name of the state.
+    minimum_row = billions.iloc[billions.index == min_row_number]
+    print(minimum_row.loc[:, ['name', 'state']])
+
+
 def larger_than_hawaii_hw1(districts_list):
     hawaii_budget = None
     for district in districts_list:
