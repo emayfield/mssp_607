@@ -24,9 +24,30 @@ def q6_smallest_mean_district_size(districts_list, state_populations):
             smallest_mean = mean
     print(f"Q6: Smallest mean is {round(smallest_mean)} in {state_with_smallest_mean}")
            
+# The following code produces the same thing in Pandas. 
+# It uses new formatting for renaming columns that was not discussed in class. 
 def q6_pandas(districts_df, states_df):
-    print("Pandas: Not implemented yet")
-    pass
+
+    # In-progress object representing the groups of districts for each state.
+    state_groups = districts_df.groupby("state")
+
+    # Count how many rows exist for each state and then grab the first column of results.
+    # (column 0 is the state name for each group)
+    districts_count = state_groups.count().iloc[:,1]
+
+    # Add the new column to our existing dataframe of state populations
+    comb = states_df.join(districts_count, on="state")
+
+    # Rename the column to something more appropriate - using .count() means
+    # we are no longer counting revenue
+    comb = comb.rename(columns={"revenue":"num_districts"})
+
+    # Calculate mean district size by dividing population by number of districts
+    comb["mean_size"] = comb["population"] / comb["num_districts"]
+
+    # Find the minimum row and print its information to the terminal.
+    min_state_row = comb.mean_size.idxmin()
+    print(comb.iloc[min_state_row])
 
 
 import pandas as pd

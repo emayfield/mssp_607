@@ -1,0 +1,26 @@
+{"reviews": 
+    [
+        {
+            "review_id": "1LNvg3PyXzeU68-ktq9fZg", 
+            "user_id": "MabrEO2S1mswM9ynnMyGbg", 
+            "business_id": "N9Q2HlpqeG2NKbvqJI-REw", 
+            "stars": 5.0, 
+            "useful": 0, 
+            "funny": 0, 
+            "cool": 0, 
+            "text": "We went here for the 1st time this evening and really enjoyed it - great ambiance, delicious food with amazing flavors, and good service. We really liked the fresh roll, spring rolls, dumplings, wild curry (good spice!), and basil chicken. They served healthy portions. Cash only & BYOB. We will definitely return!", 
+            "date": "2016-01-30 01:55:00"
+        }, 
+        {
+            "review_id": "SGngWZ0FQrpZ3s6AHpBI1Q", 
+            "user_id": "CwBVZExmAjQiYWjxSJHeww", 
+            "business_id": "3nR6JE3hD-D-Fhzr10_k7g", 
+            "stars": 4.0, 
+            "useful": 0, 
+            "funny": 0, 
+            "cool": 0, 
+            "text": "This was a great find near Pittsburgh alternative to down town scene. Ambiance was great on the deck by the river, and service was excellent (Thanks Melisa for history lessens!). Seafood including Oysters were fresh and well prepared. Price was reasonable for \"Prefix\" menu including scrumptious dessert.  What an evening to end a fantastic summer day in Pittsburgh.", 
+            "date": "2011-06-29 02:06:30"
+        }
+    ]
+}
