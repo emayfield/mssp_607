@@ -29,16 +29,39 @@ def complicated_us_phone_number(num):
 # the third value captured in parentheses, which we know will be the area code, if
 # a full phone number is found at all.
 def find_area_code(num):
-    parens_pattern = "(1(-|\s))?\(?(\d{3})\)?(-|\s)(\d{3})(-|\s)(\d{4})"
+    # Regular expressions can be written all in one large line.
+    parens_pattern = "(1(-|\s))?(\(?\d{3}\)?)(-|\s)(\d{3})(-|\s)(\d{4})"
+    
+    # Or you can define them piece by piece, then aggregate them together.
+    country_code = "(1(-|\s))?"
+    area_code = "(\(?\d{3}\)?)(-|\s)"
+    phone_number = "(\d{3})(-|\s)(\d{4})"
+
+    emergency_number = "911"
+
+    full_pattern = f"({emergency_number}|{country_code}{area_code}{phone_number})"
+
+    # Either way, you can use .search() to find the first occurrence, or 
+    # .findall() to get a list of all the appearances
     match = re.search(parens_pattern, num)
     if match:
+        # All the subsections of your regular expression that are grouped
+        # in parentheses are "captured" and are available in a list by calling
+        # .groups(). If you want to find the area code in the string above, for instance,
+        # you can get groups[2].
         groups = match.groups()
+        print(groups)
         area_code = groups[2]
         print(area_code)
+        return area_code
+
+
+
 
 if __name__ == "__main__":
     test_numbers = ["412-268-2000", "1-412-268-2000", "(412) 268 2000", "911", "999", "14122682000"]
     for number in test_numbers:
         allowed = complicated_us_phone_number(number)
         print(f"{number} is allowed? {allowed}")
-        find_area_code(number)
+        area_code = find_area_code(number)
+        print(f"{area_code} is the area code.")

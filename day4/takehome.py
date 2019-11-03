@@ -31,16 +31,16 @@ def q6_pandas(districts_df, states_df):
     # In-progress object representing the groups of districts for each state.
     state_groups = districts_df.groupby("state")
 
-    # Count how many rows exist for each state and then grab the first column of results.
-    # (column 0 is the state name for each group)
-    districts_count = state_groups.count().iloc[:,1]
-
-    # Add the new column to our existing dataframe of state populations
-    comb = states_df.join(districts_count, on="state")
+    # Count how many rows exist for each state using .size() 
+    # this method was pointed out in class as a little easier than .count()!
+    districts_count = state_groups.size()
 
     # Rename the column to something more appropriate - using .count() means
     # we are no longer counting revenue
-    comb = comb.rename(columns={"revenue":"num_districts"})
+    districts_count = districts_count.rename("num_districts")
+
+    # Add the new column to our existing dataframe of state populations
+    comb = states_df.join(districts_count, on="state")
 
     # Calculate mean district size by dividing population by number of districts
     comb["mean_size"] = comb["population"] / comb["num_districts"]

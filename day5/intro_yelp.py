@@ -8,7 +8,6 @@ def fetch_yelp(takeout_file):
     with open(takeout_file) as in_file:
         raw = pd.read_json(in_file)
         reviews = raw["reviews"]
-        print(reviews.shape)
         yelp = json_normalize(reviews)
         print(yelp.shape)
         print(yelp.columns)
@@ -18,11 +17,14 @@ def fetch_yelp(takeout_file):
 # For each review, it prints out which words the user used that were followed
 # by an exclamation point.
 def find_enthusiasm(reviews):
-    pattern = "(\w+)(!)+"
+    pattern = "(\w+)!(!)+"
     exclamations = re.compile(pattern)
     for review in reviews.loc[:, "text"]:
         matches = re.findall(exclamations, review)
         if len(matches) > 0:
+            print("-------")
+            print(review)
+            print("-------")
             print(f"This user was excited about {len(matches)} things: ")
             for match in matches:
                 print(f"   {match[0]}")
@@ -41,9 +43,7 @@ if __name__ == "__main__":
     takeout_filename = "PA_takeout_reviews.json"
     takeout = fetch_yelp(takeout_filename)
     find_enthusiasm(takeout)
-
     takeout["enthusiasm"] = takeout.text.apply(measure_enthusiasm)
-    print(takeout.enthusiasm.head)
-
+    print(takeout.enthusiasm)
     enthusiasm_max = takeout.iloc[takeout.enthusiasm.idxmax()]
     print(enthusiasm_max.text)
